@@ -5,6 +5,19 @@ All notable changes to Pulseboard will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- **LICENSE**: MIT License for open source distribution
+
+### Changed
+- **Git Configuration**: Updated to use GitHub noreply email for privacy
+
+### Infrastructure
+- **GitHub Repository**: Published to https://github.com/alexleekt/pulseboard
+
+---
+
+## Previous Session Changes
+
+### Added
 - **WORKING.md**: Real-time work coordination to prevent multi-agent conflicts
   - Active work tracking with file lists and timestamps
   - Recent completions history (last 5 entries)
