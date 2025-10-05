@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { loadSettings } from '@/lib/utils/settings';
 import { OllamaClient } from '@/lib/ollama/client';
-import { TeamCardsDB } from '@/lib/chromadb/client';
+import { PulseboardDB } from '@/lib/chromadb/client';
 
 export interface SystemStatus {
   overall: 'operational' | 'degraded' | 'down';
@@ -161,7 +161,7 @@ export async function GET() {
         chromadbStatus.status = 'degraded';
         chromadbStatus.message = 'Cannot test ChromaDB (Ollama down)';
       } else {
-        const chromadb = new TeamCardsDB(ollama);
+        const chromadb = new PulseboardDB(ollama);
         await chromadb.initialize();
       }
     } catch (error) {

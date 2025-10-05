@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Settings, Check, X, Loader2 } from 'lucide-react';
+import Link from 'next/link';
+import { Settings, Check, X, Loader2, Building2 } from 'lucide-react';
 import type { AppSettings } from '@/lib/types';
 
 export default function SettingsPage() {
@@ -14,6 +15,10 @@ export default function SettingsPage() {
 
   useEffect(() => {
     loadSettings();
+  }, []);
+
+  useEffect(() => {
+    document.title = 'Pulseboard | Settings';
   }, []);
 
   const loadSettings = async () => {
@@ -70,7 +75,7 @@ export default function SettingsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+      <div className="min-h-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
       </div>
     );
@@ -78,7 +83,7 @@ export default function SettingsPage() {
 
   if (!settings) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 p-8">
+      <div className="min-h-full bg-slate-50 dark:bg-slate-900 p-8">
         <div className="max-w-4xl mx-auto">
           <p className="text-red-600">Failed to load settings</p>
         </div>
@@ -87,7 +92,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 p-8">
+    <div className="min-h-full bg-slate-50 dark:bg-slate-900 p-8">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center gap-3 mb-8">
           <Settings className="w-8 h-8 text-slate-700 dark:text-slate-300" />
@@ -95,6 +100,24 @@ export default function SettingsPage() {
         </div>
 
         <div className="space-y-6">
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+                Company Management
+              </h2>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                Update company profiles, values, themes, and culture in one place.
+              </p>
+            </div>
+            <Link
+              href="/companies"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium"
+            >
+              <Building2 className="w-4 h-4" />
+              Open Companies
+            </Link>
+          </div>
+
           {/* Ollama Configuration */}
           <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 border border-slate-200 dark:border-slate-700">
             <h2 className="text-xl font-semibold mb-4 text-slate-900 dark:text-white">

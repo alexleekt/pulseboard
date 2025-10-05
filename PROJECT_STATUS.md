@@ -1,4 +1,4 @@
-# TeamCards - Project Status
+# Pulseboard - Project Status
 
 ## ✅ Completed (Phase 1 - Foundation)
 
@@ -86,13 +86,13 @@
 ## Architecture Overview
 
 ```
-TeamCards/
+Pulseboard/
 ├── app/
 │   ├── page.tsx              ✅ Home page
 │   ├── api/
 │   │   └── settings/
 │   │       └── route.ts      ✅ Settings API
-│   ├── companies/            ⏳ Company pages
+│   ├── companies/            ✅ Company pages
 │   ├── members/              ⏳ Member pages
 │   ├── manager/              ⏳ Manager dashboard
 │   └── settings/             ⏳ Settings page

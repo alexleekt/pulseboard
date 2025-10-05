@@ -28,11 +28,17 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
+    const fullName = body.fullName || body.name;
+    const [firstNameFromFull, ...lastNameParts] = (fullName || '').split(' ').filter(Boolean);
+    const email = typeof body.email === 'string' ? body.email.trim() : undefined;
     const member: TeamMember = {
       id: body.id || uuidv4(),
       companyId: body.companyId,
       name: body.name,
-      email: body.email,
+      fullName,
+      firstName: body.firstName || firstNameFromFull || body.name,
+      lastName: body.lastName || (lastNameParts.length > 0 ? lastNameParts.join(' ') : undefined),
+      email,
       role: body.role,
       avatar: body.avatar,
       influence: body.influence || '',

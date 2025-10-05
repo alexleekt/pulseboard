@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Home, Building2, Users, BookOpen, BarChart3, Settings, Activity, ChevronRight } from 'lucide-react';
 
@@ -11,6 +12,9 @@ interface SitemapNode {
 }
 
 export default function SitemapPage() {
+  useEffect(() => {
+    document.title = 'Pulseboard | Sitemap';
+  }, []);
   const sitemap: SitemapNode[] = [
     {
       title: 'Home',
@@ -95,7 +99,7 @@ export default function SitemapPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 p-8">
+    <div className="min-h-full bg-slate-50 dark:bg-slate-900 p-8">
       <div className="max-w-4xl mx-auto">
         <Link
           href="/"
@@ -115,7 +119,7 @@ export default function SitemapPage() {
         <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md border border-slate-200 dark:border-slate-700">
           <div className="p-6">
             <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
-              A complete overview of all pages and features in TeamCards
+              A complete overview of all pages and features in Pulseboard
             </p>
 
             <div className="space-y-2">

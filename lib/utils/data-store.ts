@@ -1,11 +1,12 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import type { Company, TeamMember, DiaryEntry } from '@/lib/types';
+import type { Company, TeamMember, DiaryEntry, DiaryDraft } from '@/lib/types';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const COMPANIES_FILE = path.join(DATA_DIR, 'companies.json');
 const MEMBERS_FILE = path.join(DATA_DIR, 'members.json');
 const DIARIES_FILE = path.join(DATA_DIR, 'diaries.json');
+const DIARY_DRAFTS_FILE = path.join(DATA_DIR, 'diary-drafts.json');
 
 // Ensure data directory exists
 async function ensureDataDir() {
@@ -123,6 +124,46 @@ export async function loadDiaries(): Promise<DiaryEntry[]> {
   } catch (error) {
     return [];
   }
+}
+
+export async function loadDiaryDrafts(): Promise<DiaryDraft[]> {
+  await ensureDataDir();
+  try {
+    const data = await fs.readFile(DIARY_DRAFTS_FILE, 'utf-8');
+    return JSON.parse(data, (key, value) => {
+      if (key === 'createdAt' || key === 'updatedAt') {
+        return new Date(value);
+      }
+      return value;
+    });
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function saveDiaryDrafts(drafts: DiaryDraft[]): Promise<void> {
+  await ensureDataDir();
+  await fs.writeFile(DIARY_DRAFTS_FILE, JSON.stringify(drafts, null, 2));
+}
+
+export async function upsertDiaryDraft(draft: DiaryDraft): Promise<DiaryDraft> {
+  const drafts = await loadDiaryDrafts();
+  const index = drafts.findIndex((d) => d.id === draft.id);
+
+  if (index >= 0) {
+    drafts[index] = draft;
+  } else {
+    drafts.push(draft);
+  }
+
+  await saveDiaryDrafts(drafts);
+  return draft;
+}
+
+export async function deleteDiaryDraft(id: string): Promise<void> {
+  const drafts = await loadDiaryDrafts();
+  const filtered = drafts.filter((d) => d.id !== id);
+  await saveDiaryDrafts(filtered);
 }
 
 export async function saveDiaries(diaries: DiaryEntry[]): Promise<void> {

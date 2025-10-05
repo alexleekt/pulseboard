@@ -79,6 +79,10 @@ export default function StatusPage() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    document.title = 'Pulseboard | System Status';
+  }, []);
+
   const pullModel = async (modelName: string) => {
     setPullingModels(prev => new Set(prev).add(modelName));
     setFixError(null);
@@ -145,14 +149,14 @@ export default function StatusPage() {
 
   if (loading && !status) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+      <div className="min-h-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 p-8">
+    <div className="min-h-full bg-slate-50 dark:bg-slate-900 p-8">
       <div className="max-w-4xl mx-auto">
         <Link
           href="/"

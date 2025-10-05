@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to TeamCards will be documented in this file.
+All notable changes to Pulseboard will be documented in this file.
 
 ## [Unreleased]
 

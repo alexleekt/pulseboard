@@ -1,4 +1,4 @@
-# TeamCards
+# Pulseboard
 
 A local-first team member tracking application with AI-powered insights. Track team member profiles, superpowers, growth areas, work diaries, and get intelligent recommendations for project assignments.
 

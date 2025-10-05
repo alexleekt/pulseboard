@@ -1,13 +1,57 @@
 [
   {
-    "id": "ba2fce78-37b9-4886-9b83-55393f0995a4",
+    "id": "aa3dc00e-fb1c-4718-8ca5-9834cad1b1b3",
     "memberId": "22b8ee28-6e03-4ed5-b205-bb698b3199c9",
     "companyId": "a2488b88-b28e-4164-8d5e-9ef0ad8cdfab",
-    "content": "asdf",
-    "timestamp": "2025-10-05T02:51:00.000Z",
+    "content": "**Einstein quietly slips the cosmological constant** into his field equations to keep the universe perfectly balanced, then later disowns it as his greatest blunder. Generations pass before distant Type Ia supernovae turn up too faint for a matter-filled cosmos, forcing the constant back into the spotlight as the simplest driver of cosmic acceleration. Observers measure the stretching of supernova light-curves across billions of light-years and find the dilation factor matches general relativity’s prediction to the decimal, turning exploding stars into cosmic stopwatches. Simultaneously, relativists refine three-dimensional collapse models rooted in the same equations, pinning the maximum stable neutron-star mass near 2.2 solar masses and clarifying which progenitors must leave black holes behind. Multitude surveys fold thousands of supernova distances together with microwave-background priors and recover a dark-energy equation of state indistinguishable from Einstein’s Λ. Gravitational-wave detectors capture neutron-star mergers, their measured tidal deformability favoring a comparatively soft nuclear equation of state that tightens the collapse boundary even further. A sample of over fifteen hundred distant supernovae sharpens time-dilation precision to the percent level, leaving little room for non-expanding alternatives. Plans now target supernovae beyond redshift two, seek joint analyses with gravitational-wave standard sirens, and aim for fully three-dimensional, neutrino-radiation-hydrodynamics simulations ready for the next galactic core-collapse event.\n\n\n\n",
+    "timestamp": "2025-10-02T18:57:00.000Z",
     "tags": [],
     "projects": [],
-    "createdAt": "2025-10-05T02:53:17.063Z",
-    "updatedAt": "2025-10-05T02:53:17.063Z"
+    "createdAt": "2025-10-05T04:57:40.871Z",
+    "updatedAt": "2025-10-05T05:48:46.529Z"
+  },
+  {
+    "id": "19cbdae2-6fe9-4307-b611-e0d8080d2064",
+    "memberId": "22b8ee28-6e03-4ed5-b205-bb698b3199c9",
+    "companyId": "a2488b88-b28e-4164-8d5e-9ef0ad8cdfab",
+    "content": "he ate a turkey. it broke trust with josh.",
+    "timestamp": "2025-10-05T05:47:00.000Z",
+    "tags": [],
+    "projects": [],
+    "createdAt": "2025-10-05T05:48:24.197Z",
+    "updatedAt": "2025-10-05T05:49:16.741Z"
+  },
+  {
+    "id": "240566ec-1b8f-416c-b4ca-564cb9b3cbd7",
+    "memberId": "d87a6d34-2dd6-4ece-aa90-dea2228802f9",
+    "companyId": "a2488b88-b28e-4164-8d5e-9ef0ad8cdfab",
+    "content": "- ate a cheeseburger from the fridge that might not have been his.\n",
+    "timestamp": "2025-10-05T05:51:12.097Z",
+    "tags": [],
+    "projects": [],
+    "createdAt": "2025-10-05T05:51:12.097Z",
+    "updatedAt": "2025-10-05T05:51:36.675Z"
+  },
+  {
+    "id": "8c8abd03-3f16-4708-9b74-2337768fe220",
+    "memberId": "d87a6d34-2dd6-4ece-aa90-dea2228802f9",
+    "companyId": "a2488b88-b28e-4164-8d5e-9ef0ad8cdfab",
+    "content": "joined the company",
+    "timestamp": "2024-09-05T05:51:00.000Z",
+    "tags": [],
+    "projects": [],
+    "createdAt": "2025-10-05T05:51:49.383Z",
+    "updatedAt": "2025-10-05T05:51:49.383Z"
+  },
+  {
+    "id": "a155f985-6394-4743-bc58-c66da86863e6",
+    "memberId": "d87a6d34-2dd6-4ece-aa90-dea2228802f9",
+    "companyId": "a2488b88-b28e-4164-8d5e-9ef0ad8cdfab",
+    "content": "@josh went to the factory and lost the potatoes",
+    "timestamp": "2025-10-05T05:57:05.919Z",
+    "tags": [],
+    "projects": [],
+    "createdAt": "2025-10-05T05:57:05.919Z",
+    "updatedAt": "2025-10-05T05:57:05.919Z"
   }
 ]

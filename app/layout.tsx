@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TeamCards - AI-Powered Team Management",
+  title: "Pulseboard - AI-Powered Team Management",
   description: "Track team members, skills, and growth with AI assistance",
 };
 

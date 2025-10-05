@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 
 interface GeneratingStatusProps {
@@ -9,42 +9,65 @@ interface GeneratingStatusProps {
 }
 
 export function GeneratingStatus({ isGenerating, label = 'Generating' }: GeneratingStatusProps) {
-  const [elapsed, setElapsed] = useState(0);
-  const [startTime, setStartTime] = useState<number | null>(null);
+  const [elapsedMs, setElapsedMs] = useState(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const startRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (isGenerating) {
-      setStartTime(Date.now());
-      setElapsed(0);
+      startRef.current = Date.now();
+      setElapsedMs(0);
 
-      const interval = setInterval(() => {
-        if (startTime) {
-          setElapsed((Date.now() - startTime) / 1000);
-        }
-      }, 100);
-
-      return () => clearInterval(interval);
-    } else {
-      if (startTime) {
-        // Show final time with 2 decimal places when complete
-        const final = ((Date.now() - startTime) / 1000).toFixed(2);
-        setElapsed(parseFloat(final));
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
       }
-      setStartTime(null);
+
+      timerRef.current = setInterval(() => {
+        if (startRef.current) {
+          setElapsedMs(Date.now() - startRef.current);
+        }
+      }, 250);
+
+      return () => {
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+          timerRef.current = null;
+        }
+      };
     }
-  }, [isGenerating, startTime]);
 
-  if (!isGenerating && elapsed === 0) return null;
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
 
-  const displayTime = isGenerating
-    ? Math.round(elapsed) + 's'
-    : elapsed.toFixed(2) + 's';
+    if (startRef.current) {
+      setElapsedMs(Date.now() - startRef.current);
+      startRef.current = null;
+    }
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [isGenerating]);
+
+  if (!isGenerating) {
+    return null;
+  }
+
+  const seconds = elapsedMs / 1000;
+  const formatted = seconds >= 60
+    ? `${(seconds / 60).toFixed(1).replace(/\.0$/, '')}m`
+    : `${seconds >= 10 ? Math.round(seconds) : seconds.toFixed(1)}s`;
 
   return (
-    <div className="flex items-center gap-2 text-sm">
-      {isGenerating && <Loader2 className="w-4 h-4 animate-spin text-blue-600 dark:text-blue-400" />}
-      <span className="text-slate-600 dark:text-slate-400">
-        {label}: {displayTime}
+    <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+      <Loader2 className="w-4 h-4 animate-spin text-blue-600 dark:text-blue-400" />
+      <span>
+        {label ? `${label}: ` : ''}{formatted}
       </span>
     </div>
   );

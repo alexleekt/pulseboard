@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Building2, Plus, Loader2, Edit } from 'lucide-react';
+import { Building2, Plus, Loader2 } from 'lucide-react';
 import type { Company } from '@/lib/types';
 
 export default function CompaniesPage() {
@@ -11,6 +11,10 @@ export default function CompaniesPage() {
 
   useEffect(() => {
     loadCompanies();
+  }, []);
+
+  useEffect(() => {
+    document.title = 'Pulseboard | Companies';
   }, []);
 
   const loadCompanies = async () => {
@@ -27,14 +31,14 @@ export default function CompaniesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+      <div className="min-h-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 p-8">
+    <div className="min-h-full bg-slate-50 dark:bg-slate-900 p-8">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
@@ -71,39 +75,33 @@ export default function CompaniesPage() {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {companies.map((company) => (
-              <div
+              <Link
                 key={company.id}
-                className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 transition-colors"
+                href={`/companies/${company.id}`}
+                className="group block bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg transition-all"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                      <Building2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    </div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                    <Building2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
                     <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
                       {company.name}
                     </h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Click to view and edit details
+                    </p>
                   </div>
                 </div>
 
                 {company.values && (
-                  <div className="mb-4">
+                  <div className="mb-2">
                     <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-3">
                       {company.values}
                     </p>
                   </div>
                 )}
-
-                <div className="pt-4 border-t border-slate-200 dark:border-slate-700">
-                  <Link
-                    href={`/companies/${company.id}`}
-                    className="flex items-center justify-center gap-2 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium w-full"
-                  >
-                    <Edit className="w-4 h-4" />
-                    Edit
-                  </Link>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

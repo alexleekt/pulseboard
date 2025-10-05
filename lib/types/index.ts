@@ -1,4 +1,4 @@
-// Core types for TeamCards
+// Core types for Pulseboard
 
 export type TimeRange = '1M' | '3M' | '6M' | '1Y' | 'ALL';
 
@@ -17,7 +17,10 @@ export interface TeamMember {
   id: string;
   companyId: string;
   name: string;
-  email: string;
+  firstName?: string;
+  lastName?: string;
+  fullName?: string;
+  email?: string;
   role: string;
   avatar?: string;
   influence: string;
@@ -36,6 +39,18 @@ export interface DiaryEntry {
   timestamp: Date;
   tags?: string[];
   projects?: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface DiaryDraft {
+  id: string;
+  content: string;
+  suggestedMemberId?: string;
+  suggestedCompanyId?: string;
+  reasoning?: string;
+  mentionedMemberIds?: string[];
+  mentionedCompanyIds?: string[];
   createdAt: Date;
   updatedAt: Date;
 }

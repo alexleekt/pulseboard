@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ChromaDB Management Script for TeamCards
+# ChromaDB Management Script for Pulseboard
 
 set -e
 
@@ -151,7 +151,7 @@ clean_chromadb() {
 
 # Show help
 show_help() {
-    echo "ChromaDB Management Script for TeamCards"
+    echo "ChromaDB Management Script for Pulseboard"
     echo ""
     echo "Usage: $0 [command]"
     echo ""

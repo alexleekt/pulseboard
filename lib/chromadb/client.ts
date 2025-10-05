@@ -24,7 +24,7 @@ class OllamaEmbeddingFunction implements IEmbeddingFunction {
   }
 }
 
-export class TeamCardsDB {
+export class PulseboardDB {
   private client: ChromaClient;
   private ollama: OllamaClient;
   private embeddingFunction: OllamaEmbeddingFunction;
@@ -93,7 +93,8 @@ export class TeamCardsDB {
   async upsertMember(member: TeamMember) {
     if (!this.membersCollection) await this.initialize();
 
-    const text = `${member.name} - ${member.role}
+    const displayName = member.fullName || `${member.firstName ?? ''} ${member.lastName ?? ''}`.trim() || member.name;
+    const text = `${displayName} - ${member.role}
 Influence: ${member.influence}
 Project Impacts: ${member.projectImpacts}
 Superpowers: ${member.superpowers.join(', ')}
@@ -109,7 +110,7 @@ Growth Areas: ${member.growthAreas.join(', ')}`;
         type: 'member',
         companyId: member.companyId,
         memberId: member.id,
-        name: member.name,
+        name: displayName,
         role: member.role,
         updatedAt: member.updatedAt.toISOString(),
       }],

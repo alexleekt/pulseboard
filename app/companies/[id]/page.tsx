@@ -33,6 +33,16 @@ export default function CompanyEditPage({ params }: { params: Promise<{ id: stri
     }
   }, [id, isNew]);
 
+  useEffect(() => {
+    if (isNew) {
+      document.title = 'Pulseboard | New Company';
+    } else if (company.name) {
+      document.title = `Pulseboard | ${company.name}`;
+    } else {
+      document.title = 'Pulseboard | Company';
+    }
+  }, [company.name, isNew]);
+
   const loadCompany = async () => {
     try {
       const response = await fetch(`/api/companies/${id}`);
@@ -202,14 +212,14 @@ export default function CompanyEditPage({ params }: { params: Promise<{ id: stri
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+      <div className="min-h-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 p-8">
+    <div className="min-h-full bg-slate-50 dark:bg-slate-900 p-8">
       <ErrorDialog
         error={error?.message || null}
         details={error?.details}

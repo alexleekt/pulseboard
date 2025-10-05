@@ -33,7 +33,7 @@ export function Footer() {
           </div>
 
           <div className="text-sm text-slate-600 dark:text-slate-400">
-            <p>TeamCards • Built with Next.js 15 & Ollama</p>
+            <p>Pulseboard • Built with Next.js 15 & Ollama</p>
           </div>
         </div>
       </div>

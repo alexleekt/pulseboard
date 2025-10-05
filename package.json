@@ -1,5 +1,5 @@
 {
-  "name": "teamcards",
+  "name": "pulseboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,6 +15,8 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.19.1",
+    "@uiw/react-markdown-preview": "^5.1.5",
+    "@uiw/react-md-editor": "^4.0.8",
     "ai": "^5.0.60",
     "chromadb": "^3.0.17",
     "date-fns": "^4.1.0",

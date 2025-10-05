@@ -19,6 +19,10 @@ export default function MembersPage() {
     loadMembers();
   }, [selectedCompanyId]);
 
+  useEffect(() => {
+    document.title = 'Pulseboard | Team Members';
+  }, []);
+
   const loadData = async () => {
     try {
       const companiesResponse = await fetch('/api/companies');
@@ -51,14 +55,14 @@ export default function MembersPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+      <div className="min-h-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 p-8">
+    <div className="min-h-full bg-slate-50 dark:bg-slate-900 p-8">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
@@ -127,7 +131,7 @@ export default function MembersPage() {
                     {member.avatar ? (
                       <img
                         src={member.avatar}
-                        alt={member.name}
+                        alt={member.fullName || member.name || 'Team member avatar'}
                         className="w-12 h-12 rounded-full object-cover"
                       />
                     ) : (
@@ -137,7 +141,7 @@ export default function MembersPage() {
                     )}
                     <div>
                       <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                        {member.name}
+                        {member.fullName || member.name}
                       </h3>
                       <p className="text-sm text-slate-600 dark:text-slate-400">
                         {member.role}
@@ -152,7 +156,7 @@ export default function MembersPage() {
                     {getCompanyName(member.companyId)}
                   </div>
                   <p className="text-sm text-slate-600 dark:text-slate-400">
-                    {member.email}
+                    {member.email && member.email.trim() !== '' ? member.email : 'Email not provided'}
                   </p>
                 </div>
 

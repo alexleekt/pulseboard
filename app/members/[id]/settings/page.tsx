@@ -36,6 +36,14 @@ export default function MemberSettingsPage({ params }: { params: Promise<{ id: s
     loadMember();
   }, [id]);
 
+  useEffect(() => {
+    if (member.name) {
+      document.title = `Pulseboard | ${member.name} Settings`;
+    } else {
+      document.title = 'Pulseboard | Member Settings';
+    }
+  }, [member.name]);
+
   const loadCompanies = async () => {
     try {
       const response = await fetch('/api/companies');
@@ -99,17 +107,23 @@ export default function MemberSettingsPage({ params }: { params: Promise<{ id: s
   };
 
   const saveMember = async () => {
-    if (!member.name || !member.email || !member.companyId) {
-      alert('Name, email, and company are required');
+    if (!member.name || !member.companyId) {
+      alert('Name and company are required');
       return;
     }
 
     setSaving(true);
     try {
+      const rawEmail = member.email;
+      const payload = {
+        ...member,
+        email: typeof rawEmail === 'string' ? rawEmail.trim() : rawEmail,
+      };
+
       const response = await fetch(`/api/members/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(member),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
@@ -157,14 +171,14 @@ export default function MemberSettingsPage({ params }: { params: Promise<{ id: s
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+      <div className="min-h-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 p-8">
+    <div className="min-h-full bg-slate-50 dark:bg-slate-900 p-8">
       <ErrorDialog
         error={error?.message || null}
         details={error?.details}
@@ -204,7 +218,7 @@ export default function MemberSettingsPage({ params }: { params: Promise<{ id: s
 
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Email *
+                Email (optional)
               </label>
               <input
                 type="email"

@@ -42,9 +42,17 @@ export async function PUT(
       );
     }
 
+    const sanitizedBody: Partial<TeamMember> = {
+      ...body,
+    };
+
+    if (typeof body.email === 'string') {
+      sanitizedBody.email = body.email.trim();
+    }
+
     const updatedMember: TeamMember = {
       ...existingMember,
-      ...body,
+      ...sanitizedBody,
       id,
       updatedAt: new Date(),
     };

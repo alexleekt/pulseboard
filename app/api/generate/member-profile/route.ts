@@ -23,6 +23,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const fallbackName = `${member.firstName ?? ''} ${member.lastName ?? ''}`.trim();
+    const displayName = member.fullName || fallbackName || member.name || 'this team member';
+
     // Get company context
     const company = await getCompany(member.companyId);
     if (!company) {
@@ -66,7 +69,8 @@ export async function POST(request: NextRequest) {
       .slice(0, 30) // Limit to 30 recent entries from team
       .map(d => {
         const teamMember = allCompanyMembers.find(m => m.id === d.memberId);
-        return `[${teamMember?.name || 'Unknown'}] ${d.content}`;
+        const teamMemberName = teamMember?.fullName || teamMember?.name || 'Unknown';
+        return `[${teamMemberName}] ${d.content}`;
       })
       .join('\n\n');
 
@@ -77,7 +81,7 @@ Company: ${company.name}
 Values: ${company.values}
 Themes: ${company.themes}
 
-TEAM MEMBER: ${member.name}
+TEAM MEMBER: ${displayName}
 Role: ${member.role || 'Not specified'}
 
 THEIR WORK DIARY (Recent Entries):
@@ -86,7 +90,7 @@ ${memberWorkContext}
 TEAM CONTEXT (What colleagues have been working on):
 ${teamContext}
 
-Based on this information, analyze ${member.name}'s contributions and generate:
+Based on this information, analyze ${displayName}'s contributions and generate:
 
 1. **Influence**: How does this person influence the team and organization? Look for:
    - Leadership in initiatives
