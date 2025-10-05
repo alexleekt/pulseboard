@@ -5,32 +5,63 @@ All notable changes to Pulseboard will be documented in this file.
 ## [Unreleased]
 
 ### Added
-- Initial project setup with Next.js 15, React 19, TypeScript, and Tailwind CSS
-- Project structure with organized folders for lib, components, and data
-- ChromaDB integration for vector database (local, flat files)
-- Ollama AI provider integration for local LLM inference
-- Model Context Protocol (MCP) SDK integration for extensibility
-- Updated .gitignore for local data and bun lockfile
-- Comprehensive README with installation and usage instructions
+- **WORKING.md**: Real-time work coordination to prevent multi-agent conflicts
+  - Active work tracking with file lists and timestamps
+  - Recent completions history (last 5 entries)
+  - Guidelines for claiming, updating, and clearing work
+  - Lock mechanism to prevent simultaneous edits
+- **TODO.md**: Task tracking system for multi-agent workflow
+  - Status indicators (🔴 Blocked, 🟡 In Progress, 🟢 Completed, ⚪ Pending)
+  - Priority levels (High, Medium, Low)
+  - Agent assignment field to clarify ownership
+  - Task template with acceptance criteria, context, and files affected
+  - Backlog and sprint organization
+  - Implementation checklist for agents
 
-### Infrastructure
-- Multi-company support architecture
-- Team member profile tracking system
-- Work diary with editable timestamps
-- Company context and values management
-- Timeline filtering (1M, 3M, 6M, 1Y, all-time)
-- Dual-model query support (query multiple LLMs in parallel)
-- RAG (Retrieval Augmented Generation) system for semantic search
-- Auto-update system for profile synchronization
+### Changed
+- **CLAUDE.md**: Defined Claude's role as planner, bug fixer, and task tracker (not feature implementer)
+  - Workflow documentation for feature requests, bug fixes, and code review
+  - Updated project instructions to reference AGENTS.md
+- **AGENTS.md**: Comprehensive multi-agent collaboration framework
+  - Task workflow: Claude plans → Agents implement → Claude reviews
+  - Agent responsibilities and collaboration process
+  - **Multi-agent commit format**: `[agent-name] type: description`
+  - **File ownership guidelines**: Clear primary ownership (Claude for docs, others for code)
+  - **Conflict prevention protocol**: WORKING.md coordination, pull-before-start, backup strategies
+  - **Shared file handling**: Special procedures for high-risk files (data/*.json, package.json)
 
-### Dependencies
-- chromadb: Vector database for semantic search
-- ollama-ai-provider: Local LLM integration
-- ai: AI SDK for unified LLM interface
-- @modelcontextprotocol/sdk: MCP integration
-- lucide-react: Icon library
-- date-fns: Date utilities
-- uuid: Unique ID generation
+## [0.3.0] - 2025-10-05
+
+### Added
+- **Quick Diary Entry System** (Homepage):
+  - Markdown editor for composing diary entries
+  - Auto-save functionality with 2-second delay
+  - Draft persistence in `diary-drafts.json`
+  - LLM-powered classification to auto-assign entries to team members
+  - @mentions for team members (e.g., @john-doe)
+  - ^mentions for companies (e.g., ^acme-corp)
+  - Real-time handle suggestions while typing
+  - Direct assignment when exactly one teammate is tagged
+  - API routes: `/api/diaries/quick` (POST/GET) and `/api/diaries/quick/[id]` (PUT/DELETE)
+- **GeneratingStatus Component**:
+  - Real-time progress indicator for LLM operations
+  - Elapsed time counter updating every 250ms
+  - Shows seconds with decimal precision during generation
+  - Rounded display format after completion
+  - Indeterminate spinner with animated icon
+- **Enhanced Member Profile Pages**:
+  - Improved UI and layout (465+ lines of enhancements)
+  - Better data presentation and interaction
+
+### Changed
+- **Homepage**: Complete redesign with quick diary entry as primary feature
+- **Project Name**: Officially renamed to "Pulseboard"
+- **README.md**: Updated branding and project name
+- **Data Store**: Added support for diary drafts
+
+### Dependencies Added
+- `@uiw/react-markdown-preview`: Markdown preview rendering
+- `@uiw/react-md-editor`: Rich markdown editing experience
 
 ## [0.2.0] - 2025-10-04
 
