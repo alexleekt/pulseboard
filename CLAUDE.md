@@ -1,0 +1,1 @@
+- the html page title should always be reflective of the page/content loaded

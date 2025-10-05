@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: teamcards-chromadb
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount local directory for persistent storage
+      - ./data/chroma:/chroma/chroma
+    environment:
+      # Allow CORS for local development
+      - CHROMA_SERVER_CORS_ALLOW_ORIGINS=["http://localhost:3000"]
+      - IS_PERSISTENT=TRUE
+      - PERSIST_DIRECTORY=/chroma/chroma
+      - ANONYMIZED_TELEMETRY=FALSE
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped

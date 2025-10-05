@@ -1,0 +1,22 @@
+[
+  {
+    "id": "22b8ee28-6e03-4ed5-b205-bb698b3199c9",
+    "companyId": "a2488b88-b28e-4164-8d5e-9ef0ad8cdfab",
+    "name": "A",
+    "email": "a",
+    "role": "a",
+    "avatar": "",
+    "influence": "a",
+    "projectImpacts": "a",
+    "superpowers": [
+      "b",
+      "b"
+    ],
+    "growthAreas": [
+      "c",
+      "c"
+    ],
+    "createdAt": "2025-10-05T02:47:24.045Z",
+    "updatedAt": "2025-10-05T02:47:24.045Z"
+  }
+]
